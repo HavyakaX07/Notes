@@ -309,18 +309,8 @@ The above design expands on the following points from the uploaded document:
 
 ---
 
-## 22) Repository Structure (suggested)
-```
-/README_detailed.md       # This document
-/docs/architecture.md     # Diagrams & deep dives
-/specs/api.md             # API schemas & examples
-/specs/models.md          # Data models & migrations
-/runbooks/                # Ops runbooks for incidents
-/terraform/               # Infra as code (optional)
-```
-
 ---
 
-## 23) How to Use This Document
+## 22) How to Use This Document
 - For interviews: skim **Executive Summary**, **Architecture**, **Feed Models**, **Trade-offs**.
 - For building: start with **APIs**, **Data Model**, **Cache Design**, then scale with **observability** and **capacity planning**.

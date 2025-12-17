@@ -81,65 +81,12 @@ Response:
 
 ![Architecture v2](architecture_typeahead_v2.png)
 
-**Mermaid — Component Diagram**
-```mermaid
-flowchart LR
-    subgraph Client
-      UI[Search Box]
-      Debounce[Debouncer (250-300ms)]
-      UI --> Debounce
-    end
+**Component Diagram**
+[Component Diagram](image1.png)
 
-    Debounce --> AG[API Gateway]
-    AG --> SS[Suggestion Service]
-    SS --> RC[(Redis Cache
-ZSET per prefix)]
-    SS -->|Cache miss| DB[(Sharded Datastore
-SQL/NoSQL)]
 
-    subgraph WritePath[Write & Analytics]
-      Svc[Search Service]
-      Bus[(Event Bus
-Kafka/Kinesis)]
-      SP[Stream Processor
-Flink/Spark]
-      IB[Index Builder
-Top-K per prefix]
-      Svc --> Bus --> SP --> IB --> RC
-      Svc --> DB
-    end
-
-    subgraph Ops[Observability]
-      Mon[Monitoring & Telemetry]
-    end
-
-    SS --> Mon
-    Svc --> Mon
-```
-
-**Mermaid — Sequence Diagram**
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant UI as Web/Mobile UI
-    participant API as Suggestion API
-    participant C as Redis Cache
-    participant D as Datastore
-
-    U->>UI: Type "wha..."
-    UI->>UI: Debounce 300ms
-    UI->>API: GET /suggestion?q=wha
-    API->>C: ZRANGE SUG:en:wha 0 9
-    alt cache hit
-      C-->>API: Top-10 suggestions
-      API-->>UI: Suggestions
-    else cache miss
-      API->>D: Query top K by prefix
-      D-->>API: Results
-      API->>C: ZADD SUG:en:wha ... (warm cache)
-      API-->>UI: Suggestions
-    end
-```
+**Sequence Diagram**
+[Sequence Diagram](image2.png)
 
 ---
 
@@ -217,3 +164,4 @@ EXPIRE SUG:en:wha 86400         # optional TTL
 
 ### Attribution
 Crafted for system design storytelling. Includes both **Mermaid diagrams** and a **PNG** for decks.
+

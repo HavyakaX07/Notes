@@ -125,61 +125,12 @@ inbox_id, message_id, sender_id, status
 
 ---
 
-## Architecture Diagram (Mermaid)
-```mermaid
-flowchart LR
-    Client --> L4LB[Edge L4 Load Balancer]
-    L4LB --> GW[WebSocket Gateways]
-    GW --> SR[Shard Router]
-    SR --> S1[Shard 1 - App Servers]
-    SR --> S2[Shard 2 - App Servers]
-    SR --> S3[Shard 3 - App Servers]
-    S1 --> R1[(Redis - presence/pubsub)]
-    S2 --> R2[(Redis - presence/pubsub)]
-    S3 --> R3[(Redis - presence/pubsub)]
-    S1 --> DB1[(Messages Store)]
-    S2 --> DB2[(Messages Store)]
-    S3 --> DB3[(Messages Store)]
-    S1 --> BUS[(Kafka/Event Bus)]
-    S2 --> BUS
-    S3 --> BUS
-    BUS --> GF[Group Fanout Service]
-    GF --> S1
-    GF --> S2
-    GF --> S3
-```
-
+## Architecture Diagram
+What'sApp.drawio.png
 ---
 
 ## Sequence: Send & Deliver Message (Mermaid)
-```mermaid
-sequenceDiagram
-    participant C as Client (Sender)
-    participant G as WebSocket Gateway
-    participant SR as Shard Router
-    participant SA as Shard App Server (Recipient shard)
-    participant R as Redis (Recipient shard)
-    participant DB as Inbox DB (Recipient shard)
-    participant CR as Client (Recipient)
-
-    C->>G: WS connect + Auth (token with user_id)
-    G->>SR: route by ConsistentHash(user_id)
-    SR->>SA: proxy WS stream
-
-    C->>SA: sendMessage(B -> A, content)
-    SA->>DB: Persist message + Inbox record (undelivered)
-    SA->>R: PUBLISH user:{A}, messageId
-
-    Note over CR: If online and subscribed
-    R-->>SA: messageId
-    SA->>CR: push message via WS
-    CR-->>SA: ACK
-    SA->>DB: mark Inbox delivered
-
-    Note over CR: If offline
-    R--xSA: (no subscriber)
-    DB-->CR: delivered on reconnect
-```
+SequenceDiagram.png
 
 ---
 

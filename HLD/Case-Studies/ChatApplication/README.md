@@ -126,11 +126,11 @@ inbox_id, message_id, sender_id, status
 ---
 
 ## Architecture Diagram
-(What'sApp.drawio.png)
+![Architecture Diagram](What'sApp.drawio.png)
 ---
 
 ## Sequence: Send & Deliver Message (Mermaid)
-(SequenceDiagram.png)
+![Sequence Diagram](SequenceDiagram.png)
 
 ---
 

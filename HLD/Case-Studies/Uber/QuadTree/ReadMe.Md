@@ -51,6 +51,7 @@ Each quadrant can recursively split further as needed.
 - **Detailed Video:** [Watch Here](https://www.youtube.com/watch?v=OcUKFIjhKu0&t=1142s)
 - **Visualization:** [Quad Trees Explained](https://www.pragy.dev/blog/quadtrees)
 - **Uber H3:** [Watch Here](https://www.youtube.com/watch?v=ay2uwtRO3QE)
+- ** Leetcode Challenge:** [Solve here](https://leetcode.com/problems/construct-quad-tree/description/)
 
 ---
 

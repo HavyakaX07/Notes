@@ -48,7 +48,8 @@ Each quadrant can recursively split further as needed.
 ---
 
 ## 🔗 External Resources
-- **Detailed Blog:** [Quad Trees Explained](https://www.pragy.dev/blog/quadtrees)
+- **Detailed Video:** [Watch Here](https://www.youtube.com/watch?v=OcUKFIjhKu0&t=1142s)
+- **Visualization:** [Quad Trees Explained](https://www.pragy.dev/blog/quadtrees)
 - **Uber H3:** [Watch Here](https://www.youtube.com/watch?v=ay2uwtRO3QE)
 
 ---
